@@ -18,15 +18,20 @@ const Menu = ({ location: { pathname } }) => {
             style={{ marginRight: "1.5em" }}
             className="logo"
           />
-          Wild OS
-        </SMenu.Item>
+          </SMenu.Item>
 
-        <SMenu.Item active={pathname === "/"}>
-          <Link to="/">Desktop</Link>
-        </SMenu.Item>
-        <SMenu.Item active={pathname === "/search"}>
-          <Link to="/search">Search engine</Link>
-        </SMenu.Item>
+            <SMenu.Item active={pathname === "/"}>
+                <Link to="/">Desktop</Link>
+            </SMenu.Item>
+                <SMenu.Item active={pathname === "/directories"}>
+                <Link to="/companies">List of companies</Link>
+            </SMenu.Item>
+            <SMenu.Item active={pathname === "/"}>
+                <Link to="/members"> List of members</Link>
+            </SMenu.Item>
+            <SMenu.Item active={pathname === "/search"}>
+                <Link to="/search">Search engine</Link>
+            </SMenu.Item>
         {/* 
   // TIPS : Thoses links are just an example !!!! REPLACE THEME !
         <SMenu.Item active={isMatching(pathname, '/participants')}>
