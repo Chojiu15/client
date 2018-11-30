@@ -10,7 +10,7 @@ import Footer from './Footer';
  */
 const Layout = ({ children }) => {
   return (
-    <Container fluid>
+    <Container size='massive'>
       <Menu />
 
       <Container>{children}</Container>

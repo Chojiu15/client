@@ -20,7 +20,7 @@ export default () => {
           <Route exact path="/companies" component={CompaniesPage} />
           <Route
             path="/companies/new"
-            component={() => <h1>Listes des companies : TODO</h1>}
+            component={() => <h1>Listes des entreprises : TODO</h1>}
           />
           <Route
             path="/companies/:id/view"

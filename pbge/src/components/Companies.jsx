@@ -13,7 +13,21 @@ export default function Companies({ companies }) {
     <List
       items={companies}
       renderItem={(company, i) => (
-        <Company id={company.id} name={company.name} />
+        <ul>
+          <li>
+            Nom de l'organisation:{" "}
+            <Company id={company.id} name={company.name} />
+          </li>
+          <li>
+            Nom : <Company id={company.id} username={company.username} />
+          </li>
+          <li>
+            Email : <Company id={company.id} email={company.email} />
+          </li>
+          <li>
+            Téléphone : <Company id={company.id} phone={company.phone} />
+          </li>
+        </ul>
       )}
     />
   );

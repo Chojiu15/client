@@ -8,11 +8,11 @@ import PropTypes from "prop-types";
  */
 export default function List({ items, renderItem }) {
   return (
-    <ul>
+    <div>
       {items.map((item, i) => (
-        <li key={i}>{renderItem(item, i)}</li>
+        <div key={i}>{renderItem(item, i)}</div>
       ))}
-    </ul>
+    </div>
   );
 }
 
