@@ -9,9 +9,8 @@ import {
   Menu as SMenu
 } from "semantic-ui-react";
 import logo from "./logo.jpg";
-import CSS from "./pages.css";
 
-/**
+/**<Route path="./Homelayout" component={HomepageLayout} /
  * The menu is connected to the router and re-render each time the location changes
  * See withRouter HOC : https://reacttraining.com/react-router/web/api/withRouter
  */
@@ -51,17 +50,20 @@ const Menu = ({ location: { pathname } }) => {
             <SMenu.Item active={pathname === "/search"}>
               <Link to="/search">RECHERCHE ANNUAIRE</Link>
             </SMenu.Item>
-            <SMenu.Item className="registerButton">
-              <div>
+            <SMenu.Item>
+              <div active={pathname === "/enregistrement"}>
                 <Button href="./enregistrement" primary>
                   Enregistrez-vous
                 </Button>
               </div>
               <div className="connectButton">
-                <Button href="./connexion" secondary>
+                <Button href="./connexion" primary>
                   Connectez-vous
                 </Button>
               </div>
+            </SMenu.Item>
+            <SMenu.Item>
+              <Button href="./homeLayout" />
             </SMenu.Item>
           </SMenu.Menu>
           {/* 
