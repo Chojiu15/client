@@ -5,17 +5,19 @@ const Footer = () => (
   <SMenu fixed="bottom">
     <Container>
       <SMenu.Item>
-        <a target="_blank">Qui sommes nous ?</a>
+        <a target="_blank" href="https://www.dupaysbasqueauxgrandesecoles.org/">
+          Qui sommes nous ?
+        </a>
       </SMenu.Item>
       <SMenu.Item>
         <a
           href="https://www.helloasso.com/associations/du-pays-basque-aux-grandes-ecoles"
           target="_blank"
         >
-          L'association du Pays Basque aux Grandes Ecoles
+          Nous rejoindre
         </a>
       </SMenu.Item>
-      <SMenu.Item>@ Copywrit</SMenu.Item>
+      <SMenu.Item>Copyright</SMenu.Item>
       <SMenu.Item>A propos</SMenu.Item>
     </Container>
   </SMenu>

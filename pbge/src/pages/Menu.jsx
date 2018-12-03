@@ -9,6 +9,7 @@ import {
   Menu as SMenu
 } from "semantic-ui-react";
 import logo from "./logo.jpg";
+import CSS from "./pages.css";
 
 /**
  * The menu is connected to the router and re-render each time the location changes
@@ -28,6 +29,7 @@ const Menu = ({ location: { pathname } }) => {
         <Container>
           <SMenu.Item>
             <Image
+              href="./"
               size="maxi"
               src={logo}
               style={{ marginRight: "1.5em" }}
@@ -49,8 +51,17 @@ const Menu = ({ location: { pathname } }) => {
             <SMenu.Item active={pathname === "/search"}>
               <Link to="/search">RECHERCHE ANNUAIRE</Link>
             </SMenu.Item>
-            <SMenu.Item>
-              <Button primary>Sign Up</Button>
+            <SMenu.Item className="registerButton">
+              <div>
+                <Button href="./enregistrement" primary>
+                  Enregistrez-vous
+                </Button>
+              </div>
+              <div className="connectButton">
+                <Button href="./connexion" secondary>
+                  Connectez-vous
+                </Button>
+              </div>
             </SMenu.Item>
           </SMenu.Menu>
           {/* 
