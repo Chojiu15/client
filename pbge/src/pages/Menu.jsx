@@ -1,19 +1,32 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { Container, Image, Menu as SMenu } from "semantic-ui-react";
+import {
+  Responsive,
+  Segment,
+  Container,
+  Button,
+  Image,
+  Menu as SMenu
+} from "semantic-ui-react";
 import logo from "./logo.jpg";
 
 /**
  * The menu is connected to the router and re-render each time the location changes
  * See withRouter HOC : https://reacttraining.com/react-router/web/api/withRouter
  */
+const ResponsiveExampleMixed = () => (
+  <Responsive as={Segment} minWidth={320} maxWidth={2559}>
+    Visible only if display has width between <code>320px</code> and{" "}
+    <code>2559px</code>
+  </Responsive>
+);
 
 const Menu = ({ location: { pathname } }) => {
   return (
     <div className="container">
       <SMenu size="massive">
         <Container>
-          <SMenu.Item as={Link} to="/" header>
+          <SMenu.Item>
             <Image
               size="maxi"
               src={logo}
@@ -25,15 +38,21 @@ const Menu = ({ location: { pathname } }) => {
 //        <SMenu.Item active={pathname === "/"}> 
           <Link to="/">Desktop</Link>   
 </SMenu.Item>   */}
-          <SMenu.Item active={pathname === "/directories"}>
-            <Link to="/directories">Entreprise / ORGANISATION</Link>
+          <SMenu.Item active={pathname === "/companies"}>
+            <Link to="/companies">Entreprise / ORGANISATION</Link>
           </SMenu.Item>
           <SMenu.Item active={pathname === "/members"}>
             <Link to="/members"> MEMBRES ASSOCIATION</Link>
           </SMenu.Item>
-          <SMenu.Item active={pathname === "/search"}>
-            <Link to="/search">RECHERCHE ANNUAIRE</Link>
-          </SMenu.Item>
+
+          <SMenu.Menu position="right">
+            <SMenu.Item active={pathname === "/search"}>
+              <Link to="/search">RECHERCHE ANNUAIRE</Link>
+            </SMenu.Item>
+            <SMenu.Item>
+              <Button primary>Sign Up</Button>
+            </SMenu.Item>
+          </SMenu.Menu>
           {/* 
   // TIPS : Thoses links are just an example !!!! REPLACE THEME !
         <SMenu.Item active={isMatching(pathname, '/participants')}>
