@@ -15,7 +15,7 @@ const Footer = () => (
           L'association du Pays Basque aux Grandes Ecoles
         </a>
       </SMenu.Item>
-      <SMenu.Item>@ Copywrit</SMenu.Item>
+      <SMenu.Item>@ Copywrite</SMenu.Item>
       <SMenu.Item>A propos</SMenu.Item>
     </Container>
   </SMenu>

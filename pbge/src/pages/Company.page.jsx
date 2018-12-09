@@ -23,14 +23,9 @@ export default class CompanyPage extends React.Component {
   render() {
     const { currentCompany } = this.state;
     if (currentCompany === null) {
-      return <div>Loading ....</div>;
+      return <div>Chargement en cours ....</div>;
     }
 
-    return (
-      <div className={"cn"}>
-        <Company name={currentCompany.name} id={currentCompany.id} /> ===>
-        <Link to={`/companies/${this.props.id}/edit`}> Edition </Link>
-      </div>
-    );
+    return <div className={"cn"} />;
   }
 }

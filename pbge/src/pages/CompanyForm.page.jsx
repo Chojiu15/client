@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios"; // HTTP library to make http request @see : https://github.com/axios/axios
 import { Redirect } from "react-router-dom";
+import { Button, Form } from "semantic-ui-react";
 
 /**
  * TODO
@@ -62,6 +63,7 @@ export default class CompanyFormPage extends React.Component {
     const pdgName = e.currentTarget.elements.pdgName.value;
     const description = e.currentTarget.elements.description.value;
     const city = e.currentTarget.elements.city.value;
+    const secteur = e.currentTarget.elements.sector.value;
     const { id } = this.props;
 
     const { data: currentCompany } = await axios.put(
@@ -80,7 +82,8 @@ export default class CompanyFormPage extends React.Component {
         currentCompany.location
       }.json`,
       {
-        city
+        city,
+        secteur
       }
     );
 
@@ -92,7 +95,12 @@ export default class CompanyFormPage extends React.Component {
   }
 
   render() {
-    const { currentCompany, redirectTo, currentLocation } = this.state;
+    const {
+      currentCompany,
+      redirectTo,
+      currentLocation,
+      currentSector
+    } = this.state;
     if (redirectTo !== null) {
       return <Redirect to={redirectTo} />;
     }
@@ -108,65 +116,87 @@ export default class CompanyFormPage extends React.Component {
     }
 
     return (
-      <form onSubmit={this.handleOnSubmit}>
-        <label htmlFor="dirName">Nom de l'organisation : </label>
-        <input
-          id="dirName"
-          name="name"
-          type="text"
-          defaultValue={currentCompany.name}
-        />
+      <Form onSubmit={this.handleOnSubmit}>
+        <Form.Group widths="equal">
+          <Form.Field>
+            <label htmlFor="dirName">Organisation : </label>
+            <input
+              id="dirName"
+              name="name"
+              type="text"
+              defaultValue={currentCompany.name}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label htmlFor="dirUserName">Nom : </label>
+            <input
+              id="dirUserName"
+              name="username"
+              type="text"
+              defaultValue={currentCompany.username}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label htmlFor="dirPdgName">Président général : </label>
+            <input
+              id="dirPdgName"
+              name="pdgName"
+              type="text"
+              defaultValue={currentCompany.pdgName}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label htmlFor="dirEmail">Email : </label>
+            <input
+              id="dirEmail"
+              name="email"
+              type="text"
+              defaultValue={currentCompany.email}
+            />
+          </Form.Field>
+        </Form.Group>
+        <Form.Field>
+          <label htmlFor="dirPhone">Téléphone : </label>
+          <input
+            id="dirPhone"
+            name="phone"
+            type="text"
+            defaultValue={currentCompany.phone}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label htmlFor="dirsector">Secteur : </label>
+          <input
+            id="dirsector"
+            name="secteur"
+            type="text"
+            defaultValue={currentLocation.secteur}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label htmlFor="dirlocation">Ville : </label>
+          <input
+            id="dirlocation"
+            name="city"
+            type="text"
+            defaultValue={currentLocation.city}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label htmlFor="dirdescription">Description : </label>
+          <input
+            id="dirdescription"
+            name="description"
+            type="text"
+            defaultValue={currentCompany.description}
+          />
+        </Form.Field>
+
         <br />
-        <label htmlFor="dirUserName">Nom : </label>
-        <input
-          id="dirUserName"
-          name="username"
-          type="text"
-          defaultValue={currentCompany.username}
-        />
-        <br />
-        <label htmlFor="dirEmail">Email : </label>
-        <input
-          id="dirEmail"
-          name="email"
-          type="text"
-          defaultValue={currentCompany.email}
-        />
-        <br />
-        <label htmlFor="dirPhone">Téléphone : </label>
-        <input
-          id="dirPhone"
-          name="phone"
-          type="text"
-          defaultValue={currentCompany.phone}
-        />
-        <br />
-        <label htmlFor="dirPdgName">Président général : </label>
-        <input
-          id="dirPdgName"
-          name="pdgName"
-          type="text"
-          defaultValue={currentCompany.pdgName}
-        />
-        <br />
-        <label htmlFor="dirdescription">Description : </label>
-        <input
-          id="dirdescription"
-          name="description"
-          type="text"
-          defaultValue={currentCompany.description}
-        />
-        <br />
-        <label htmlFor="dirlocation">Ville : </label>
-        <input
-          id="dirlocation"
-          name="city"
-          type="text"
-          defaultValue={currentLocation.city}
-        />
-        <br />
-        <button type="submit">Save</button>
-      </form>
+        <Button color="red" type submit>
+          Enregistrer
+        </Button>
+      </Form>
     );
   }
 }

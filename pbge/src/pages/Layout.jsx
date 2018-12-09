@@ -1,8 +1,8 @@
-import React from 'react';
-import { Container } from 'semantic-ui-react';
+import React from "react";
+import { Container } from "semantic-ui-react";
 
-import Menu from './Menu';
-import Footer from './Footer';
+import Menu from "./Menu";
+import Footer from "./Footer";
 
 /**
  * Wrap the children component into a <Container /> and a <Menu /> and a <Footer />
@@ -10,7 +10,7 @@ import Footer from './Footer';
  */
 const Layout = ({ children }) => {
   return (
-    <Container size='massive'>
+    <Container size="massive">
       <Menu />
 
       <Container>{children}</Container>

@@ -12,15 +12,17 @@ export default function Company({
   username,
   email,
   phone,
-  location
+  location,
+  sector
 }) {
   return (
-    <Link to={`/companies/${id}/view`}>
+    <Link to={`/companies/${id}/edit`}>
       {name}
       {username}
       {email}
       {phone}
       {location}
+      {sector}
     </Link>
   );
 }

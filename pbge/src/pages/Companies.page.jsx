@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import axios from "axios"; // HTTP library to make http request @see : https://github.com/axios/axios
 
-import { companies } from "../dummyData";
-// import Directory from "./Directory";
 import Companies from "../components/Companies";
 
 /**
@@ -15,7 +13,7 @@ export default class CompaniesPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        companies: []
+      companies: []
     };
   }
   componentDidMount() {

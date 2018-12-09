@@ -19,24 +19,9 @@ export default () => {
           <Route exact path="/" component={Desktop} />
           <Route exact path="/companies" component={CompaniesPage} />
           <Route
-            path="/companies/new"
-            component={() => <h1>Listes des entreprises : TODO</h1>}
-          />
-          <Route
-            path="/companies/:id/view"
-            component={({ match }) => <CompanyPage id={match.params.id} />}
-          />
-          <Route
             path="/companies/:id/edit"
-            component={({ match }) => (
-              <CompanyFormPage id={match.params.id} />
-            )}
+            component={({ match }) => <CompanyFormPage id={match.params.id} />}
           />
-          <Route
-            path="/companies/:id/delete"
-            component={() => <h1>DIR- DELETE - TODO</h1>}
-          />
-          
           {/* TODO: Added files missing routes */}
         </Switch>
       </Layout>
