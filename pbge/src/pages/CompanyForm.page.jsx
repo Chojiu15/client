@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import axios from "axios"; // HTTP library to make http request @see : https://github.com/axios/axios
 import { Redirect } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
@@ -8,12 +8,33 @@ import { Button, Form } from "semantic-ui-react";
  * TIPS : use componentDidMount lyfeCycle method to make your 'GET /directories' with axios (https://github.com/axios/axios)
  * Display the page that display list of directory
  */
+
+const options = [
+  { key: "a", text: "Agroalimentaire", value: "agroalimentaire" },
+  {
+    key: "b",
+    text: " Biosciences, pharmacie et santé,recherche",
+    value: " Biosciences, pharmacie et santé,recherche"
+  },
+  {
+    key: "c",
+    text: "Chimie, sciences de l'innovation",
+    value: "Chimie, sciences de l'innovation"
+  },
+  {
+    key: "i",
+    text: " Informatique, nouvelles technologies",
+    value: " Informatique, nouvelles technologies"
+  }
+];
+
 export default class CompanyFormPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentCompany: null,
       currentLocation: null,
+      currentSector: null,
       redirectTo: null
     };
 
@@ -32,9 +53,15 @@ export default class CompanyFormPage extends React.Component {
         currentCompany.location
       }.json`
     );
+    const { data: currentSector } = await axios.get(
+      `https://peaceful-springs-62051.herokuapp.com${
+        currentCompany.sector
+      }.json`
+    );
     this.setState({
       currentCompany,
-      currentLocation
+      currentLocation,
+      currentSector
     });
     // const setCurrentCompany = company =>
     //   new Promise(resolve => {
@@ -63,7 +90,7 @@ export default class CompanyFormPage extends React.Component {
     const pdgName = e.currentTarget.elements.pdgName.value;
     const description = e.currentTarget.elements.description.value;
     const city = e.currentTarget.elements.city.value;
-    const secteur = e.currentTarget.elements.sector.value;
+    const namesector = e.currentTarget.elements.sector.value;
     const { id } = this.props;
 
     const { data: currentCompany } = await axios.put(
@@ -77,19 +104,29 @@ export default class CompanyFormPage extends React.Component {
         description
       }
     );
+
     const { data: currentLocation } = await axios.put(
       `https://peaceful-springs-62051.herokuapp.com${
         currentCompany.location
       }.json`,
       {
-        city,
-        secteur
+        city
+      }
+    );
+
+    const { data: currentSector } = await axios.put(
+      `https://peaceful-springs-62051.herokuapp.com${
+        currentCompany.sector
+      }.json`,
+      {
+        name: namesector
       }
     );
 
     this.setState({
       currentCompany,
       currentLocation,
+      currentSector,
       redirectTo: `/companies`
     });
   }
@@ -112,6 +149,11 @@ export default class CompanyFormPage extends React.Component {
     if (currentLocation === null) {
       return (
         <div>Fetching the current location of props : {this.props.id} ...</div>
+      );
+    }
+    if (currentSector === null) {
+      return (
+        <div>Fetching the current sector of props : {this.props.id} ...</div>
       );
     }
 
@@ -164,14 +206,38 @@ export default class CompanyFormPage extends React.Component {
             defaultValue={currentCompany.phone}
           />
         </Form.Field>
-        <Form.Field>
-          <label htmlFor="dirsector">Secteur : </label>
-          <input
-            id="dirsector"
-            name="secteur"
-            type="text"
-            defaultValue={currentLocation.secteur}
-          />
+        <label htmlFor="dirsector">Secteur : </label>
+        <Form.Field id="dirsector" name="sector" control="select">
+          <option value={currentSector.name}> {currentSector.name}</option>
+          <option value="biosciences, pharmacie et santé,recherche">
+            Biosciences, pharmacie et santé,recherche
+          </option>
+          <option value="chimie, sciences de l'innovation">
+            Chimie, sciences de l'innovation
+          </option>
+          <option value="informatique, nouvelles technologies">
+            Informatique, nouvelles technologies
+          </option>
+          <option value="Journalisme ">Journalisme </option>
+          <option value="Architecture/ Urbanisme/ Immobilier">
+            Architecture/ Urbanisme/ Immobilier
+          </option>
+          <option value="Sciences sociales et humaines">
+            Sciences sociales et humaines
+          </option>
+          <option value="Droit">Droit</option>
+          <option value="Finance, Comptabilité, Banque,">
+            Finance, Comptabilité, Banque
+          </option>
+          <option value="Conseil et stratégie">Conseil et stratégie</option>
+          <option value="Administration publique">
+            Administration publique
+          </option>
+          <option value="Enseignement">Enseignement</option>
+          <option value="Communication / Marketing">
+            Communication / Marketing
+          </option>
+          <option value="Autres">Autres</option>
         </Form.Field>
         <Form.Field>
           <label htmlFor="dirlocation">Ville : </label>
