@@ -1,3 +1,12 @@
+/*                                                   *
+ *             WILD CODE SCHOOL                      *
+ *     v 1.0                                         *
+ *                            author : Marc foix     *
+ *****************************************************
+ *  Ce fichier est le Menu responsive                *
+ *            de l'application                       *
+ *                                                   *
+ ****************************************************/
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import {
@@ -34,10 +43,6 @@ const Menu = ({ location: { pathname } }) => {
               className="logo"
             />
           </SMenu.Item>
-          {/*
-//        <SMenu.Item active={pathname === "/"}> 
-          <Link to="/">Desktop</Link>   
-</SMenu.Item>   */}
           <SMenu.Item active={pathname === "/companies"}>
             <Link to="/companies">Entreprise / ORGANISATION</Link>
           </SMenu.Item>
@@ -54,12 +59,12 @@ const Menu = ({ location: { pathname } }) => {
             </SMenu.Item>
           </SMenu.Menu>
           {/* 
-  // TIPS : Thoses links are just an example !!!! REPLACE THEME !
-        <SMenu.Item active={isMatching(pathname, '/participants')}>
-          <Link to="/participants">Participants</Link>
+  // 
+        <SMenu.Item active={isMatching(pathname, '/companies')}>
+          <Link to="/companies">Companies</Link>
         </SMenu.Item>
-        <SMenu.Item active={isMatching(pathname, '/classement')}>
-          <Link to="/classement">Classement</Link>
+        <SMenu.Item active={isMatching(pathname, '/members')}>
+          <Link to="/members">Members</Link>
         </SMenu.Item> 
         */}
         </Container>

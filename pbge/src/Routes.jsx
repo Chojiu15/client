@@ -1,3 +1,13 @@
+/*                                                  *
+ *             WILD CODE SCHOOL                      *
+ *     v 1.0                                         *
+ *                            author : Marc foix     *
+ *****************************************************
+ *  Ce fichier définit les routes des pages          *
+ *                                                   *
+ *                                                   *
+ ****************************************************/
+
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 

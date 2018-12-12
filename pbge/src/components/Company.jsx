@@ -1,15 +1,21 @@
+/*                                                  *
+ *             WILD CODE SCHOOL                      *
+ *     v 1.0                                         *
+ *                            author : Marc foix     *
+ *****************************************************
+ *  Ce fichier permet l'édition des informations     *
+ *  récupérés sur la base de données de la table     *
+ *  entreprise à partir du menu principal.           *
+ *                                                   *
+ ****************************************************/
+
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-/**
- * TODO
- * Display a directory
- */
 export default function Company({
   id,
   name,
-  username,
+  pdgName,
   email,
   phone,
   location,
@@ -18,7 +24,7 @@ export default function Company({
   return (
     <Link to={`/companies/${id}/edit`}>
       {name}
-      {username}
+      {pdgName}
       {email}
       {phone}
       {location}

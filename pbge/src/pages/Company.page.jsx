@@ -1,7 +1,20 @@
+/*                                                  *
+ *             WILD CODE SCHOOL                      *
+ *     v 1.0                                         *
+ *                            author : Marc foix     *
+ *****************************************************
+ *  Ce fichier permet de récupérer les informations  *
+ *  en json sur la base de données de la table       *
+ *  entreprise  (company)                            *
+ *                                                   *
+ ****************************************************/
+
 import React from "react";
 import axios from "axios"; // HTTP library to make http request @see : https://github.com/axios/axios
 import { Link } from "react-router-dom";
 import Company from "../components/Company";
+
+import { HREF } from "./Parameters";
 
 export default class CompanyPage extends React.Component {
   constructor(props) {
@@ -14,9 +27,7 @@ export default class CompanyPage extends React.Component {
   componentDidMount() {
     const { id } = this.props;
     axios
-      .get(
-        `https://peaceful-springs-62051.herokuapp.com/api/companies/${id}.json`
-      )
+      .get(HREF + `/api/companies/${id}.json`)
       .then(res => this.setState({ currentCompany: res.data }));
   }
 

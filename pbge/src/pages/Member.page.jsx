@@ -1,3 +1,14 @@
+/*                                                  *
+ *             WILD CODE SCHOOL                      *
+ *     v 1.0                                         *
+ *                            author : Marc foix     *
+ *****************************************************
+ *  Ce fichier permet de récupérer les informations  *
+ *  en json sur la base de données de la table       *
+ *  entreprise                                       *
+ *                                                   *
+ ****************************************************/
+
 import React from "react";
 import PropTypes from "prop-types";
 

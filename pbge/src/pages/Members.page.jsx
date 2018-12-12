@@ -1,5 +1,15 @@
+/*                                                  *
+ *             WILD CODE SCHOOL                      *
+ *     v 1.0                                         *
+ *                            author : Marc foix     *
+ *****************************************************
+ *  Ce fichier permet de récupérer les informations  *
+ *  en json sur la base de données de la table       *
+ *       des members                                 *
+ *                                                   *
+ ****************************************************/
+
 import React from "react";
-import PropTypes from "prop-types";
 import axios from "axios"; // HTTP library to make http request @see : https://github.com/axios/axios
 
 // import Company from "./Company";
@@ -10,11 +20,6 @@ import axios from "axios"; // HTTP library to make http request @see : https://g
  * Display the page that display list of directory
  */
 
-
-
-
-
- 
 export default function MembersPage() {
   return <h1>Members page</h1>;
 }

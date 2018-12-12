@@ -1,3 +1,12 @@
+/*                                                  *
+ *             WILD CODE SCHOOL                      *
+ *     v 1.0                                         *
+ *                            author : Marc foix     *
+ *****************************************************
+ *  Ce fichier est le layout de la page principale   *
+ *                                                   *
+ ****************************************************/
+
 import React from "react";
 import { Container } from "semantic-ui-react";
 

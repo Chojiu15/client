@@ -1,3 +1,13 @@
+/*                                                  *
+ *             WILD CODE SCHOOL                      *
+ *     v 1.0                                         *
+ *                            author : Marc foix     *
+ *****************************************************
+ *  Ce fichier permet de lister les informations     *
+ *  récupérés sur la base de données de la table     *
+ *  entreprise à partir du menu principal.           *
+ *  Il permet le lien vers le formulaire d'édition   *
+ ****************************************************/
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -39,8 +49,8 @@ export default function Companies({ companies }) {
                       <Company id={company.id} name={company.name} />
                     </li>
                     <li>
-                      Nom :{" "}
-                      <Company id={company.id} username={company.username} />
+                      Nom du P.D.G. :{" "}
+                      <Company id={company.id} pdgName={company.pdgName} />
                     </li>
                     <li>
                       Email : <Company id={company.id} email={company.email} />
