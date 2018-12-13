@@ -9,7 +9,7 @@
  *                                                   *
  ****************************************************/
 
-import React, { Component } from "react";
+import React from "react";
 import axios from "axios"; // HTTP library to make http request @see : https://github.com/axios/axios
 import { Redirect } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
@@ -22,7 +22,9 @@ export default class CompanyFormPage extends React.Component {
       currentCompany: null,
       currentLocation: null,
       currentSector: null,
-      redirectTo: null
+      currentJobOffers: [],
+      redirectTo: null,
+      isFetching: true
     };
 
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
@@ -42,10 +44,22 @@ export default class CompanyFormPage extends React.Component {
     const { data: currentSector } = await axios.get(
       HREF + `${currentCompany.sector}.json`
     );
+
+    let currentJobOffers = [];
+    if (currentCompany.jobOffer && currentCompany.jobOffer.length > 0) {
+      currentJobOffers = await Promise.all(
+        currentCompany.jobOffer.map(jobOffRoute =>
+          axios.get(HREF + `${jobOffRoute}.json`).then(res => res.data)
+        )
+      );
+    }
+
     this.setState({
       currentCompany,
       currentLocation,
-      currentSector
+      currentSector,
+      currentJobOffers,
+      isFetching: false
     });
     // const setCurrentCompany = company =>
     //   new Promise(resolve => {
@@ -67,13 +81,14 @@ export default class CompanyFormPage extends React.Component {
 
   async handleOnSubmit(e) {
     e.preventDefault();
+
+    const email = e.currentTarget.elements.email.value;
     const name = e.currentTarget.elements.name.value;
     const companyEmail = e.currentTarget.elements.companyEmail.value;
-    const email = e.currentTarget.elements.email.value;
-    const phone = parseInt(e.currentTarget.elements.phone.value);
+    const phone = e.currentTarget.elements.phone.value;
+    const address = e.currentTarget.elements.address.value;
     const pdgName = e.currentTarget.elements.pdgName.value;
     const description = e.currentTarget.elements.description.value;
-    const address = e.currentTarget.elements.address.value;
     const zipcode = parseInt(e.currentTarget.elements.zipcode.value);
     const city = e.currentTarget.elements.city.value;
     const namesector = e.currentTarget.elements.sector.value;
@@ -81,7 +96,7 @@ export default class CompanyFormPage extends React.Component {
     const { id } = this.props;
 
     const { data: currentCompany } = await axios.put(
-      HREF + "/api/companies/${id}.json",
+      HREF + `/api/companies/${id}.json`,
       {
         email,
         name,
@@ -96,7 +111,6 @@ export default class CompanyFormPage extends React.Component {
     const { data: currentLocation } = await axios.put(
       HREF + `${currentCompany.location}.json`,
       {
-        address,
         zipcode,
         city
       }
@@ -113,6 +127,7 @@ export default class CompanyFormPage extends React.Component {
       currentCompany,
       currentLocation,
       currentSector,
+
       redirectTo: `/companies`
     });
   }
@@ -122,72 +137,64 @@ export default class CompanyFormPage extends React.Component {
       currentCompany,
       redirectTo,
       currentLocation,
-      currentSector
+      currentSector,
+      currentJobOffers,
+      isFetching
     } = this.state;
     if (redirectTo !== null) {
       return <Redirect to={redirectTo} />;
     }
-    if (currentCompany === null) {
-      return (
-        <div>Fetching the current company of props : {this.props.id} ...</div>
-      );
-    }
-    if (currentLocation === null) {
-      return (
-        <div>Fetching the current location of props : {this.props.id} ...</div>
-      );
-    }
-    if (currentSector === null) {
-      return (
-        <div>Fetching the current sector of props : {this.props.id} ...</div>
-      );
+    if (isFetching) {
+      return <div>Data is fetching ....</div>;
     }
 
     return (
       <Form onSubmit={this.handleOnSubmit}>
         <Form.Group widths="equal">
           <Form.Field>
-            <label htmlFor="dirName">Organisation : </label>
+            <label htmlFor="dirName">Organisation : (*) </label>
             <input
               id="dirName"
               name="name"
               type="text"
               defaultValue={currentCompany.name}
+              required
             />
           </Form.Field>
           <Form.Field>
-            <label htmlFor="dirUserName">Nom : </label>
+            <label htmlFor="dirCompanyEmail">Email de l'organisation : </label>
             <input
-              id="dirUserName"
-              name="name"
+              id="dirCompanyEmail"
+              name="companyEmail"
               type="text"
-              defaultValue={currentCompany.name}
+              defaultValue={currentCompany.companyEmail}
             />
           </Form.Field>
           <Form.Field>
-            <label htmlFor="dirPdgName">Président général : </label>
+            <label htmlFor="dirPdgName">Président général (*) : </label>
             <input
               id="dirPdgName"
               name="pdgName"
               type="text"
               defaultValue={currentCompany.pdgName}
+              required
             />
           </Form.Field>
           <Form.Field>
-            <label htmlFor="dirEmail">Email : </label>
+            <label htmlFor="dirEmail">Email (*) : </label>
             <input
               id="dirEmail"
               name="email"
               type="text"
               defaultValue={currentCompany.email}
+              required
             />
           </Form.Field>
         </Form.Group>
-
         <label htmlFor="dirsector">Secteur : </label>
         <Form.Field id="dirsector" name="sector" control="select">
           <option value={currentSector.name}> {currentSector.name}</option>
-          <option value="Agroalimentaire">Agroalimentaire</option>
+          <option value="Agroalimentaire">Agroalimentaire</option>}
           <option value="biosciences, pharmacie et santé,recherche">
             Biosciences, pharmacie et santé,recherche
           </option>
@@ -218,6 +225,24 @@ export default class CompanyFormPage extends React.Component {
           </option>
           <option value="Autres">Autres</option>
         </Form.Field>
+        <label htmlFor="jobOffer">Offre d'emploi : </label>
+        {currentJobOffers.length ? (
+          currentJobOffers.map((jobOffer, i) => {
+            return (
+              <input
+                key={i}
+                name="title[]"
+                type="text"
+                defaultValue={jobOffer.title}
+              />
+            );
+          })
+        ) : (
+          <Form.Field>
+            <input defaultValue="Aucune offre " />
+          </Form.Field>
+        )}
+        <Form.Field />
         <Form.Group widths="equal">
           <Form.Field>
             <label htmlFor="diraddress">Adresse : </label>
@@ -225,7 +250,7 @@ export default class CompanyFormPage extends React.Component {
               id="diraddress"
               name="address"
               type="text"
-              defaultValue={currentLocation.address}
+              defaultValue={currentCompany.address}
             />
           </Form.Field>
           <Form.Field>
@@ -265,7 +290,6 @@ export default class CompanyFormPage extends React.Component {
             defaultValue={currentCompany.description}
           />
         </Form.Field>
-
         <br />
         <Button color="red" type submit>
           Enregistrer

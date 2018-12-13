@@ -7,7 +7,7 @@
  *            de l'application                       *
  *                                                   *
  ****************************************************/
-import React, { Component } from "react";
+import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import {
   Responsive,
@@ -37,7 +37,7 @@ const Menu = ({ location: { pathname } }) => {
         <Container>
           <SMenu.Item>
             <Image
-              size="maxi"
+              //size="maxi"
               src={logo}
               style={{ marginRight: "1.5em" }}
               className="logo"

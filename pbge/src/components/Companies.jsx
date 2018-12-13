@@ -9,17 +9,8 @@
  *  Il permet le lien vers le formulaire d'édition   *
  ****************************************************/
 import React from "react";
-import PropTypes from "prop-types";
 
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Image,
-  Message,
-  Segment
-} from "semantic-ui-react";
+import { Grid, Segment } from "semantic-ui-react";
 
 import List from "./List";
 import Company from "./Company";

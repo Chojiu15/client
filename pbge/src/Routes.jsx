@@ -14,7 +14,6 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Desktop from "./pages/Desktop.page";
 import CompaniesPage from "./pages/Companies.page";
-import CompanyPage from "./pages/Company.page";
 import CompanyFormPage from "./pages/CompanyForm.page";
 
 /**

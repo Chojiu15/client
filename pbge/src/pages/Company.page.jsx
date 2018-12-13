@@ -11,8 +11,6 @@
 
 import React from "react";
 import axios from "axios"; // HTTP library to make http request @see : https://github.com/axios/axios
-import { Link } from "react-router-dom";
-import Company from "../components/Company";
 
 import { HREF } from "./Parameters";
 
