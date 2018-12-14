@@ -2,6 +2,7 @@
  *             WILD CODE SCHOOL                      *
  *     v 1.0                                         *
  *                            author : Marc foix     *
+ *                      marcfoix@hotmail.com         *
  *****************************************************
  *  Ce fichier permet de lister les informations     *
  *  récupérés sur la base de données de la table     *

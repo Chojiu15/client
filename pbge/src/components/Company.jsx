@@ -1,7 +1,8 @@
-/*                                                  *
+/*                                                   *
  *             WILD CODE SCHOOL                      *
  *     v 1.0                                         *
  *                            author : Marc foix     *
+ *                         marcfoix@hotmail.com      *
  *****************************************************
  *  Ce fichier permet l'édition des informations     *
  *  récupérés sur la base de données de la table     *

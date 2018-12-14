@@ -2,6 +2,7 @@
  *             WILD CODE SCHOOL                      *
  *     v 1.0                                         *
  *                            author : Marc foix     *
+ *                      marcfoix@hotmail.com         *
  *****************************************************
  *  Ce fichier est le Menu responsive                *
  *            de l'application                       *

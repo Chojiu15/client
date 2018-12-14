@@ -1,3 +1,14 @@
+/*                                                  *
+ *             WILD CODE SCHOOL                      *
+ *     v 1.0                                         *
+ *                            author : Marc foix     *
+ *****************************************************
+ *  Ce fichier est la fonction pour les listes       *
+ *                                                   *
+ *                            author : Marc foix     *
+ *                      marcfoix@hotmail.com         *
+ ****************************************************/
+
 import React from "react";
 import PropTypes from "prop-types";
 

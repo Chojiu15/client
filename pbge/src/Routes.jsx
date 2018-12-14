@@ -2,8 +2,9 @@
  *             WILD CODE SCHOOL                      *
  *     v 1.0                                         *
  *                            author : Marc foix     *
+ *                      marcfoix@hotmail.com         *
  *****************************************************
- *  Ce fichier définit les routes des pages          *
+ *  Ce fichier définit les routes des pages Web      *
  *                                                   *
  *                                                   *
  ****************************************************/
