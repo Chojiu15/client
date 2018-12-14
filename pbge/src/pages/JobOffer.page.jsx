@@ -12,7 +12,7 @@
 import React from "react";
 import axios from "axios";
 
-import JobOffer from "../components/LinkJobOffer";
+import LinkJobOffer from "../components/LinkJobOffer";
 import { HREF } from "./Parameters";
 
 export default class JobOffer extends React.Component {
@@ -31,6 +31,6 @@ export default class JobOffer extends React.Component {
 
   render() {
     const { jobOffer } = this.state;
-    return <JobOffer jobOffer={jobOffer} />;
+    return <LinkJobOffer linkjobOffer={linkjobOffer} />;
   }
 }

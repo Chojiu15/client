@@ -14,7 +14,6 @@ import axios from "axios"; // HTTP library to make http request @see : https://g
 import { Redirect, Link } from "react-router-dom";
 import { Button, Form, Segment } from "semantic-ui-react";
 
-import JobOffer from "../components/LinkJobOffer";
 import { HREF } from "./Parameters";
 import List from "../components/List";
 import LinkJobOffer from "../components/LinkJobOffer";
@@ -35,12 +34,12 @@ export default class CompanyFormPage extends React.Component {
   }
 
   async componentDidMount() {
-    const { id } = this.props;
+    const { idcomp } = this.props;
     // const id = this.props.id;
     // const newPrrops = this.props.newProps;
 
     const { data: currentCompany } = await axios.get(
-      HREF + `/api/companies/${id}.json`
+      HREF + `/api/companies/${idcomp}.json`
     );
     const { data: currentLocation } = await axios.get(
       HREF + `${currentCompany.location}.json`
@@ -97,10 +96,10 @@ export default class CompanyFormPage extends React.Component {
     const city = e.currentTarget.elements.city.value;
     const namesector = e.currentTarget.elements.sector.value;
 
-    const { id } = this.props;
+    const { idcomp } = this.props;
 
     const { data: currentCompany } = await axios.put(
-      HREF + `/api/companies/${id}.json`,
+      HREF + `/api/companies/${idcomp}.json`,
       {
         email,
         name,
@@ -139,7 +138,7 @@ export default class CompanyFormPage extends React.Component {
   handleOnClick(e) {
     e.preventDefault();
 
-    const { id } = this.props;
+    const { idcomp } = this.props;
   }
 
   render() {
@@ -257,12 +256,6 @@ export default class CompanyFormPage extends React.Component {
             <Link to="/job_offers/new">
               <Button>Ajouter une offre</Button>
             </Link>
-          </Form.Field>
-
-          <Form.Field>
-            {/* <Link to="/joboffer"> EDITION</Link> */}
-            {/* lien vers JobOffer *
-            <JobOffer id={jobOffer.id} title={jobOffer.title} /> */}
           </Form.Field>
         </Form.Group>
         <Form.Group widths="equal">

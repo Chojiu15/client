@@ -15,6 +15,7 @@ import Layout from "./pages/Layout";
 import Desktop from "./pages/Desktop.page";
 import CompaniesPage from "./pages/Companies.page";
 import CompanyFormPage from "./pages/CompanyForm.page";
+import JobOfferFormPage from "./pages/JobOfferForm.page";
 
 /**
  * TODO : Make each component
@@ -27,9 +28,16 @@ export default () => {
         <Switch>
           <Route exact path="/" component={Desktop} />
           <Route exact path="/companies" component={CompaniesPage} />
+
           <Route
-            path="/companies/:id/edit"
-            component={({ match }) => <CompanyFormPage id={match.params.id} />}
+            path="/companies/:idcomp/edit"
+            component={({ match }) => (
+              <CompanyFormPage idcomp={match.params.idcomp} />
+            )}
+          />
+          <Route
+            path="/job_offers/:id/edit"
+            component={({ match }) => <JobOfferFormPage id={match.params.id} />}
           />
           {/* TODO: Added files missing routes */}
         </Switch>

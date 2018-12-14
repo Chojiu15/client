@@ -13,14 +13,15 @@ import axios from "axios"; // HTTP library to make http request @see : https://g
 import { Redirect } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
 
-
 import { HREF } from "./Parameters";
 
 export default class JobOfferFormPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentCompany: null,
       currentJobOffers: [],
+      redirectTo: null,
       isFetching: true
     };
 
@@ -28,26 +29,16 @@ export default class JobOfferFormPage extends React.Component {
   }
 
   async componentDidMount() {
-    const { id } = this.props;
-
-    const { data: currentJobOffers } = await axios.get(
-      HREF + `${currentCompany.jobOffer}{id}.json`
+    const { id: jobOfferId } = this.props;
+    const { data: currentJobOffer } = await axios.get(
+      HREF + `/api/job_offers/${jobOfferId}.json`
     );
-    let currentJobOffers = [];
-    if (currentCompany.jobOffer && currentCompany.jobOffer.length > 0) {
-      currentJobOffers = await Promise.all(
-        currentCompany.jobOffer.map(jobOffRoute =>
-          axios.get(HREF + `${jobOffRoute}.json`).then(res => res.data)
-        )
-      );
-    }
 
     this.setState({
-      currentJobOffers,
+      currentJobOffer,
       isFetching: false
     });
   }
-
 
   async handleOnSubmit(e) {
     e.preventDefault();
@@ -56,23 +47,8 @@ export default class JobOfferFormPage extends React.Component {
     const workingHours = e.currentTarget.elements.workingHours.value;
     const experience = e.currentTarget.elements.experience.value;
     const description = e.currentTarget.elements.description.value;
-    
 
     const { id } = this.props;
-
-    
-
-    
-    const { data: currentJobOffer } = await axios.put(
-      HREF + `${currentCompany.jobOffer}.json`,
-      {
-        name: namesector
-      }
-    );
-    this.setState({
-      currentJobOffer,
-      redirectTo: `/companies`
-    });
 
     const { data: currentJobOffer } = await axios.put(
       HREF + "/api/job_offers/${id}.json",
@@ -84,70 +60,73 @@ export default class JobOfferFormPage extends React.Component {
         description
       }
     );
+
+    this.setState({
+      currentJobOffer,
+      redirectTo: `/companies`
+      //redirectTo: "/job_offers"
+    });
   }
 
   render() {
-    const {
-      currentJobOffers,
-      isFetching
-    } = this.state;
+    const { currentJobOffer, redirectTo, isFetching } = this.state;
     if (redirectTo !== null) {
       return <Redirect to={redirectTo} />;
     }
     if (isFetching) {
-      return <div>En cours de chargement ...</div>;
+      return <div>En cours de chargement Offre d'emploi...</div>;
     }
 
     return (
-
       <Form onSubmit={this.handleOnSubmit}>
-        <Form.Group widths="equal">
-          <Form.Field>
-            <label htmlFor="dirOfferTitle">Titre de l'offre  : </label>
-            <input
-              id="dirTitle"
-              name="title"
-              type="text"
-              defaultValue={currentJobOffer.title}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label htmlFor="dirContrat">Type de contrat : </label>
-            <input
-              id="dircontractType"
-              name="contractType"
-              type="text"
-              defaultValue={currentJobOffer.contractType}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label htmlFor="dirWorkingHours">Nombre d'heures par semaine : </label>
-            <input
-              id="dirWorkingHours"
-              name="workingHours"
-              type="text"
-              defaultValue={currentCompany.workingHours}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label htmlFor="dirExperience">Experience : </label>
-            <input
-              id="dirExperience"
-              name="experience"
-              type="text"
-              defaultValue={currentCompany.experience}
-            />
-          </Form.Field> 
-          <Form.Field>
-            <label htmlFor="dirdescription">Description de l'offre : </label>
-            <input
-              id="dirdescription"
-              name="description"
-              type="text"
-              defaultValue={currentLocation.description}
-            />
-          </Form.Field>
-          <br />
+        <Form.Field>
+          <label htmlFor="dirOfferTitle">Titre de l'offre : </label>
+          <input
+            id="dirTitle"
+            name="title"
+            type="text"
+            defaultValue={currentJobOffer.title}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label htmlFor="dirContrat">Type de contrat : </label>
+          <input
+            id="dircontractType"
+            name="contractType"
+            type="text"
+            defaultValue={currentJobOffer.contractType}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label htmlFor="dirWorkingHours">
+            Nombre d'heures par semaine :{" "}
+          </label>
+          <input
+            id="dirWorkingHours"
+            name="workingHours"
+            type="text"
+            defaultValue={currentJobOffer.workingHours}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label htmlFor="dirExperience">Experience : </label>
+          <input
+            id="dirExperience"
+            name="experience"
+            type="text"
+            defaultValue={currentJobOffer.experience}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label htmlFor="dirdescription">Description de l'offre : </label>
+          <input
+            id="dirdescription"
+            name="description"
+            type="text"
+            defaultValue={currentJobOffer.description}
+          />
+        </Form.Field>
+        <br />
         <Button color="red" type submit>
           Enregistrer
         </Button>

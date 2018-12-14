@@ -23,9 +23,9 @@ export default class CompanyPage extends React.Component {
   }
 
   componentDidMount() {
-    const { id } = this.props;
+    const { idcomp } = this.props;
     axios
-      .get(HREF + `/api/companies/${id}.json`)
+      .get(HREF + `/api/companies/${idcomp}.json`)
       .then(res => this.setState({ currentCompany: res.data }));
   }
 
