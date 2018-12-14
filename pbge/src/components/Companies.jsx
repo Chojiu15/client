@@ -15,10 +15,6 @@ import { Grid, Segment } from "semantic-ui-react";
 import List from "./List";
 import Company from "./Company";
 
-/**
- * TODO
- * Display a list of companies
- */
 export default function Companies({ companies }) {
   return (
     <div>

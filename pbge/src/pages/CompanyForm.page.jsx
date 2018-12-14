@@ -11,9 +11,13 @@
 
 import React from "react";
 import axios from "axios"; // HTTP library to make http request @see : https://github.com/axios/axios
-import { Redirect } from "react-router-dom";
-import { Button, Form } from "semantic-ui-react";
+import { Redirect, Link } from "react-router-dom";
+import { Button, Form, Segment } from "semantic-ui-react";
+
+import JobOffer from "../components/LinkJobOffer";
 import { HREF } from "./Parameters";
+import List from "../components/List";
+import LinkJobOffer from "../components/LinkJobOffer";
 
 export default class CompanyFormPage extends React.Component {
   constructor(props) {
@@ -132,6 +136,12 @@ export default class CompanyFormPage extends React.Component {
     });
   }
 
+  handleOnClick(e) {
+    e.preventDefault();
+
+    const { id } = this.props;
+  }
+
   render() {
     const {
       currentCompany,
@@ -225,24 +235,36 @@ export default class CompanyFormPage extends React.Component {
           </option>
           <option value="Autres">Autres</option>
         </Form.Field>
-        <label htmlFor="jobOffer">Offre d'emploi : </label>
-        {currentJobOffers.length ? (
-          currentJobOffers.map((jobOffer, i) => {
-            return (
-              <input
-                key={i}
-                name="title[]"
-                type="text"
-                defaultValue={jobOffer.title}
-              />
-            );
-          })
-        ) : (
+        <Form.Group widths="three">
           <Form.Field>
-            <input defaultValue="Aucune offre " />
+            <label htmlFor="jobOffer">Offre d'emploi : </label>
+            {currentJobOffers.length ? (
+              <List
+                items={currentJobOffers}
+                renderItem={(jobOffer, i) => (
+                  <LinkJobOffer
+                    key={i}
+                    id={jobOffer.id}
+                    title={jobOffer.title}
+                  />
+                )}
+              />
+            ) : (
+              <Segment>Aucune offre</Segment>
+            )}
           </Form.Field>
-        )}
-        <Form.Field />
+          <Form.Field>
+            <Link to="/job_offers/new">
+              <Button>Ajouter une offre</Button>
+            </Link>
+          </Form.Field>
+
+          <Form.Field>
+            {/* <Link to="/joboffer"> EDITION</Link> */}
+            {/* lien vers JobOffer *
+            <JobOffer id={jobOffer.id} title={jobOffer.title} /> */}
+          </Form.Field>
+        </Form.Group>
         <Form.Group widths="equal">
           <Form.Field>
             <label htmlFor="diraddress">Adresse : </label>

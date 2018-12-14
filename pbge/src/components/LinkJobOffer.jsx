@@ -12,22 +12,12 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { Segment } from "semantic-ui-react";
 
-export default function JobOffer({
-  id,
-  title,
-  contractType,
-  workingHours,
-  experience,
-  description
-}) {
+export default function LinkJobOffer({ id, title }) {
   return (
     <Link to={`/job_offers/${id}/edit`}>
-      {title}
-      {contractType}
-      {workingHours}
-      {experience}
-      {description}
+      <Segment>{title}</Segment>
     </Link>
   );
 }

@@ -12,6 +12,8 @@ import React, { Component } from "react";
 import axios from "axios"; // HTTP library to make http request @see : https://github.com/axios/axios
 import { Redirect } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
+
+
 import { HREF } from "./Parameters";
 
 export default class JobOfferFormPage extends React.Component {
@@ -46,33 +48,19 @@ export default class JobOfferFormPage extends React.Component {
     });
   }
 
-  title": "chef de production porcine",
-  "contractType": "CDI",
-  "workingHours": "39h",
-  "experience": "minimum 3 ans",
-  "description": "responsable de la région du Pays Basque",
 
   async handleOnSubmit(e) {
     e.preventDefault();
     const title = e.currentTarget.elements.title.value;
     const contractType = e.currentTarget.elements.contractType.value;
     const workingHours = e.currentTarget.elements.workingHours.value;
-    const experience = parseInt(e.currentTarget.elements.experience.value);
+    const experience = e.currentTarget.elements.experience.value;
     const description = e.currentTarget.elements.description.value;
     
 
     const { id } = this.props;
 
-    const { data: currentCompany } = await axios.put(
-      HREF + "/api/companies/${id}.json",
-      {
-        title,
-        contractType,
-        workingHours,
-        experience,
-        description
-      }
-    );
+    
 
     
     const { data: currentJobOffer } = await axios.put(
@@ -85,6 +73,17 @@ export default class JobOfferFormPage extends React.Component {
       currentJobOffer,
       redirectTo: `/companies`
     });
+
+    const { data: currentJobOffer } = await axios.put(
+      HREF + "/api/job_offers/${id}.json",
+      {
+        title,
+        contractType,
+        workingHours,
+        experience,
+        description
+      }
+    );
   }
 
   render() {
